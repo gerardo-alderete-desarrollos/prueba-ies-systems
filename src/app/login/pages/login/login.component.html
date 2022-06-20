@@ -1,0 +1,45 @@
+
+<!-- <app-card-login class="content-login"></app-card-login> -->
+
+<!doctype html>
+
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="img" style="background-image: url(../../../../assets/bg-1.jpg);">
+			      </div>
+						<div class="login-wrap p-4 p-md-5">
+			      	<div class="d-flex">
+			      		<div class="w-100">
+			      			<h3 class="mb-4">Sign In</h3>
+			      		</div>
+
+			      	</div>
+					<form class="row flex-column" [formGroup]="myForm" (ngSubmit)="submitForm()" novalidate>
+						<mat-form-field>
+						 <input matInput placeholder="Usuario" formControlName="usuario">
+						 <!-- error -->
+						 <mat-error *ngIf="errorHandling('usuario', 'required')">
+							El <strong>Usuario</strong> es requerido
+						 </mat-error>
+					  </mat-form-field>
+					  <mat-form-field>
+						<input matInput placeholder="Password" formControlName="password">
+						<!-- error -->
+						<mat-error *ngIf="errorHandling('password', 'required')">
+						   El <strong>Password</strong> es requerido
+						</mat-error>
+					 </mat-form-field>
+					 <!-- Submit -->
+					 <div>
+						<button mat-flat-button color="primary" class="w-100">Enviar</button>
+					  </div>
+					</form>
+		        </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>

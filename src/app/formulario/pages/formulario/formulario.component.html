@@ -1,0 +1,94 @@
+<app-sidebar></app-sidebar>
+<div class="container">
+    <app-titulo [titulo]="titulo"></app-titulo>
+    <form class="row justify-content-center " [formGroup]="myForm" (ngSubmit)="submitForm()" novalidate>
+        <mat-card class="col-xl-6 col-lg-8 col-md-10-col-sm-12 flex-column d-flex">
+
+            <mat-form-field class="mb-2">
+                <input matInput placeholder="Nombres" formControlName="nombres" type="text">
+                <!-- error -->
+                <mat-error *ngIf="errorHandling('nombres', 'required')">
+                    Los <strong>Nombres</strong> son requeridos
+                </mat-error>
+                <mat-error *ngIf="errorHandling('nombres', 'invalidCampo')">
+                    Los <strong>Nombres</strong> no pueden tener espacios al final
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="mb-2">
+                <input matInput placeholder="Apellidos" formControlName="apellidos" type="text">
+                <!-- error -->
+                <mat-error *ngIf="errorHandling('apellidos', 'required')">
+                    Los <strong>Apellidos</strong> son requeridos
+                </mat-error>
+                <mat-error *ngIf="errorHandling('nombres', 'invalidCampo')">
+                    Los <strong>Apellidos</strong> no pueden tener espacios al final
+                </mat-error>
+            </mat-form-field>
+
+            <div class="mb-2">
+                <label id="fumasId" class="mr-2"><strong>¿Fumas?</strong></label>
+                <mat-radio-group
+                    aria-labelledby="fumasId"
+                    class="example-radio-group"
+                    formControlName="fumas">
+                        <mat-radio-button [value]="true" class="mr-2">Si</mat-radio-button>
+                        <mat-radio-button [value]="false">No</mat-radio-button>
+                        <mat-error *ngIf="errorHandling('fumas', 'required')">
+                            Este campo es requerido
+                        </mat-error>
+                </mat-radio-group>
+            </div>
+            <div class="mb-2">
+                <label id="actualmentePracticasLecturaId" class="mr-2"><strong>¿Actualmente Practicas Lectura?</strong></label>
+                <mat-radio-group
+                    aria-labelledby="actualmentePracticasLecturaId"
+                    class="example-radio-group"
+                    formControlName="actualmentePracticasLectura">
+                        <mat-radio-button [value]="true" class="mr-2">Si</mat-radio-button>
+                        <mat-radio-button [value]="false">No</mat-radio-button>
+                        <mat-error *ngIf="errorHandling('actualmentePracticasLectura', 'required')">
+                            Este campo es requerido
+                        </mat-error>
+                </mat-radio-group>
+            </div>
+            <div *ngIf="isControlLibros" class="mb-2">
+                <label><strong>Libros leidos ultimos tres meses</strong></label>
+                <div formArrayName="librosLeidosUltimosTresMeses" >
+                    <div *ngFor="let libro of librosLeidosUltimosTresMeses.controls; let i=index" >
+                        <div [formGroupName]="i" class="row">
+                            <mat-form-field class="mb-2 col-11">
+                                <input matInput placeholder="Libro {{i + 1}}" formControlName="nombreLibro" type="text">
+                            </mat-form-field>
+                            <button mat-mini-fab color="warn" aria-label="Eliminar Libro" (click)="eliminarLibro(i)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>  
+                <div>
+                    <button class="mb-2" mat-mini-fab color="warn" aria-label="Agregar Libro" (click)="agregarLibro(); $event.stopPropagation()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <mat-form-field class="mb-2">
+                <mat-label>Estado Civil</mat-label>
+                <mat-select formControlName="estadoCivil">
+                <mat-option *ngFor="let ec of estadosCiviles" [value]="ec.value">
+                    {{ec.texto}}
+                </mat-option>
+                </mat-select>
+                <mat-error *ngIf="errorHandling('estadoCivil', 'required')">
+                    El <strong>Estado Civil</strong> es requerido
+                </mat-error>
+            </mat-form-field>
+      
+            <!-- Submit -->
+            <div>
+                <button mat-flat-button color="primary" class="w-100">Enviar</button>
+            </div>
+        </mat-card>
+    </form>
+</div>
+

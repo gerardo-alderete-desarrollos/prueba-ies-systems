@@ -1,0 +1,19 @@
+.img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; 
+    width: 100vw;
+    height: 100vh;
+}
+
+.bienvenida-texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    color: whitesmoke;
+}
+  

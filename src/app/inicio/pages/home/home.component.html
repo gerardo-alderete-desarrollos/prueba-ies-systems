@@ -1,0 +1,10 @@
+<div class="img" style="background-image: url(../../../../assets/bg-2.jpg);">
+
+<div class="bienvenida-texto">
+        <h1>Bienvenido a mi portal</h1>
+        <h5>Nos podrías indicar tu nombre</h5>
+        <button mat-stroked-button class="border border-white" (click)="openDialog()">Escribe tu nombre</button>
+        <h6 *ngIf="nombre" class="mt-3">
+            Hola: <i>{{nombre | cambioLetras}}</i>
+        </h6> 
+</div>

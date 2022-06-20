@@ -1,0 +1,45 @@
+<app-sidebar></app-sidebar>
+<div class="container">
+    <app-titulo [titulo]="titulo"></app-titulo>
+        <form class="row justify-content-center " [formGroup]="myForm" (ngSubmit)="submitForm()" novalidate>
+            <mat-card class="col-xl-6 col-lg-8 col-md-10-col-sm-12 flex-column d-flex">
+                <mat-form-field appearance="fill" class="mb-2">
+                    <mat-label>Selecciona una fecha</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fecha">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="errorHandling('fecha', 'required')">
+                        La <strong>Fecha</strong> es requerida
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mb-2">
+                    <mat-label>Unidades</mat-label>
+                    <mat-select formControlName="unidad">
+                    <mat-option *ngFor="let unidad of unidades" [value]="unidad.value">
+                        {{unidad.texto}}
+                    </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="errorHandling('unidad', 'required')">
+                        La <strong>Unidad</strong> es requerida
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="mb-2">
+                    <input matInput placeholder="Cantidad" formControlName="cantidad" type="number">
+                    <!-- error -->
+                    <mat-error *ngIf="errorHandling('cantidad', 'required')">
+                        La <strong>Cantidad</strong> es requerida
+                    </mat-error>
+                </mat-form-field>
+
+                <p *ngIf="fechaCalculada">
+                    La nueva fecha es : {{ fechaCalculada | date }}
+                </p>
+                <!-- Submit -->
+                <div>
+                    <button mat-flat-button color="primary" class="w-100">Calcular</button>
+                </div>
+            </mat-card>
+        </form>
+</div>
+
